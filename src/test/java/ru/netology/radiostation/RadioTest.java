@@ -5,6 +5,14 @@ import org.junit.jupiter.api.Test;
 
 public class RadioTest {
     @Test
+    public void test() {
+        Radio cond = new Radio(40);
+        Assertions.assertEquals(0, cond.getMinRadiostation());
+        Assertions.assertEquals(40, cond.getMaxRadiostation());
+        Assertions.assertEquals(0, cond.getCurrentRadiostation());
+    }
+
+    @Test
     public void shouldSetRadiostation() {
         Radio cond = new Radio();
         cond.setCurrentRadiostation(9);
@@ -107,8 +115,8 @@ public class RadioTest {
     @Test
     public void maxRadiostationAfterUseNext() {
         Radio cond = new Radio();
-        cond.setCurrentRadiostation(9);
-        int expected = 0;
+        cond.setCurrentRadiostation(cond.getMaxRadiostation());
+        int expected = cond.getMinRadiostation();
         int actual = cond.nextRadiostation();
         Assertions.assertEquals(expected, actual);
     }
@@ -125,12 +133,10 @@ public class RadioTest {
     @Test
     public void minRadiostationAfterUsePrev() {
         Radio cond = new Radio();
-        cond.setCurrentRadiostation(0);
-        int expected = 9;
+        cond.setCurrentRadiostation(cond.getMinRadiostation());
+        int expected = cond.getMaxRadiostation();
         int actual = cond.prevRadiostation();
         Assertions.assertEquals(expected, actual);
     }
 
 }
-
-
